@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OpenweatherService } from './openweather.service';
 
 class City {
   nome: string;
@@ -24,13 +25,18 @@ export class AppComponent {
     }
   ];
   selezionata: City;
+  constructor(private wbs: OpenweatherService) { }
   clean() {
     this.selezionata=undefined;
   }
-  seleziona(itemName: string) {
+  refreshTemperature(itemName: string) {
     var trovato: Array<City> = this.cities.filter(
       el => ( el.nome === itemName )
     );
     this.selezionata = trovato[0];
-  }
+    this.wbs.getData(this.selezionata.nome).subscribe(
+      ( x: any ) => this.selezionata.temperatura = x.data[0].temp,
+      err => console.error('Observer got an error: ' + err)
+    );
+ }
 }
