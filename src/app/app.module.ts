@@ -4,10 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { OpenweatherService } from './openweather.service';
+import { CitiesComponent } from './cities/cities.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CitiesComponent
   ],
   imports: [
     BrowserModule,
