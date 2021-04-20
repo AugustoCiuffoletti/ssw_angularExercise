@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
 
+class City {
+  nome: string;
+  temperatura: string
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Esercizio Angular';
-  cities = [
+  title: string = 'Esercizio Angular';
+  cities: Array<City> = [
     {
       nome: 'Torino',
       temperatura: '14'
@@ -19,11 +23,14 @@ export class AppComponent {
       temperatura: '18'
     }
   ];
-  selezionata: string;
-  seleziona(name: string) {
-    this.selezionata = name;
-  }
+  selezionata: City;
   clean() {
     this.selezionata=undefined;
+  }
+  seleziona(itemName: string) {
+    var trovato: Array<City> = this.cities.filter(
+      el => ( el.nome === itemName )
+    );
+    this.selezionata = trovato[0];
   }
 }
